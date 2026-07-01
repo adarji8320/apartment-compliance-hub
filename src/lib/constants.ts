@@ -3,3 +3,4 @@ export const APP_TAGLINE = 'Building Standards & Compliance Management'
 export const CITY_NAME = 'Metropolis'
 export const CONTACT_EMAIL = 'support@compliancehub.fake'
 export const CONTACT_PHONE = '555-123-4567'
+export const ANNUAL_FEE_PER_UNIT = 11.50
