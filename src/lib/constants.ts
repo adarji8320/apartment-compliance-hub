@@ -23,3 +23,11 @@ export const FINES = {
   rentingWithPests: 1000.00,
   courtConvictionMax: 100000.00,
 }
+
+export const HARDCODED_CREDENTIALS = {
+  loginId: '12345',
+  pin: '6789',
+  ownerName: 'John Smith',
+}
+
+export const AUTH_STORAGE_KEY = 'apartment_compliance_hub_auth'

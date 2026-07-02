@@ -1,5 +1,6 @@
 import { DollarSign, AlertTriangle, Info } from 'lucide-react'
 import { FEES, FINES, CITY_NAME } from '@/lib/constants'
+import { Alert, AlertDescription } from '@/components/ui/alert'
 
 const feeSchedule = [
   { item: 'Annual registration / renewal', amount: `$${FEES.annualPerUnit.toFixed(2)} per residential unit` },
@@ -21,7 +22,7 @@ const finesSchedule = [
 
 export default function Fees() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Fees &amp; Fines</h1>
@@ -31,25 +32,25 @@ export default function Fees() {
       </div>
 
       {/* Info alert */}
-      <div className="mb-6 flex gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4">
-        <Info className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
-        <p className="text-sm text-blue-700">
+      <Alert variant="info" className="mb-6">
+        <Info className="h-4 w-4" aria-hidden="true" />
+        <AlertDescription>
           Fees are waived for qualifying non-profit social housing providers.
           Contact us to confirm eligibility.
-        </p>
-      </div>
+        </AlertDescription>
+      </Alert>
 
       {/* Fee Schedule */}
       <div className="mb-8 rounded-lg border overflow-hidden">
         <div className="flex items-center gap-2 px-6 py-4 border-b bg-white">
-          <DollarSign className="h-5 w-5 text-primary" />
+          <DollarSign className="h-5 w-5 text-brand" aria-hidden="true" />
           <h2 className="text-lg font-semibold text-gray-900">2026 Fee Schedule</h2>
         </div>
         <table className="w-full text-sm">
           <thead className="bg-gray-50">
             <tr>
-              <th className="text-left px-6 py-3 font-semibold text-gray-700">Fee Item</th>
-              <th className="text-right px-6 py-3 font-semibold text-gray-700">Amount</th>
+              <th scope="col" className="text-left px-6 py-3 font-semibold text-gray-700">Fee Item</th>
+              <th scope="col" className="text-right px-6 py-3 font-semibold text-gray-700">Amount</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 bg-white">
@@ -66,14 +67,14 @@ export default function Fees() {
       {/* Fines */}
       <div className="rounded-lg border overflow-hidden">
         <div className="flex items-center gap-2 px-6 py-4 border-b bg-white">
-          <AlertTriangle className="h-5 w-5 text-red-600" />
+          <AlertTriangle className="h-5 w-5 text-red-600" aria-hidden="true" />
           <h2 className="text-lg font-semibold text-gray-900">Common Fines</h2>
         </div>
         <table className="w-full text-sm">
           <thead className="bg-gray-50">
             <tr>
-              <th className="text-left px-6 py-3 font-semibold text-gray-700">Offence</th>
-              <th className="text-right px-6 py-3 font-semibold text-gray-700">Fine</th>
+              <th scope="col" className="text-left px-6 py-3 font-semibold text-gray-700">Offence</th>
+              <th scope="col" className="text-right px-6 py-3 font-semibold text-gray-700">Fine</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 bg-white">
