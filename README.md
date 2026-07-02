@@ -2,6 +2,8 @@
 
 > **Demo disclaimer:** This is a practice/portfolio project simulating an apartment building compliance & registration program for a fictional city ("Metropolis"). It is not affiliated with any real municipality.
 
+**Live site:** [apartment-compliance-hub-demo.vercel.app](https://apartment-compliance-hub-demo.vercel.app/)
+
 A React + TypeScript application for managing apartment building compliance registration, annual fees, fines, and colour-coded compliance status — modeled after municipal building-standards programs.
 
 ## Demo Login
@@ -23,13 +25,16 @@ A React + TypeScript application for managing apartment building compliance regi
 | React Router 7        | Client-side routing                                                         |
 | React Hook Form + Zod | Form state management & schema validation                                   |
 | lucide-react          | Icons                                                                       |
+| Vercel                | Hosting & deployment                                                        |
 
 ## Current Features
 
 - **Landing page** — program overview, eligibility criteria, colour-coded compliance status legend (Green/Yellow/Red), fee teaser, contact info
 - **Fees & Fines** — full fee schedule and common fine amounts
 - **Login** — Zod-validated form, mock credentials, PIN show/hide toggle, session-based auth
-- **Auth state everywhere** — Header, Footer, and Landing all reflect signed-in/out state (Login ⇄ Logout, "Register Your Building" hidden once signed in, hero CTA becomes "Go to Dashboard")
+- **Protected routes** — unauthenticated visitors are redirected to `/login` and returned to their originally-requested page after signing in
+- **Dashboard** (owner portal) — welcome banner, renewal/compliance/service-request alerts, summary cards, quick actions, buildings overview table with colour rating and status badges
+- **Auth state everywhere** — Header, Footer, and Landing all reflect signed-in/out state (Login ⇄ Logout, "Register Your Building" hidden once signed in, hero CTA becomes "Go to Dashboard"); Footer is hidden on authenticated portal pages, matching the reference app
 - **Accessibility** — WCAG 2.x AA-targeted: verified colour contrast, skip-to-content link, focus management on route change, `aria-hidden` on decorative icons, labelled landmarks, accessible form errors
 
 ## Getting Started
@@ -55,44 +60,51 @@ npm run lint     # Run ESLint
 npm run preview  # Preview production build
 ```
 
+## Deployment
+
+Hosted on [Vercel](https://vercel.com), connected to this repository's `main` branch for automatic production deploys (and preview deploys on pull requests).
+
+`vercel.json` adds a catch-all rewrite (`/(.*) → /index.html`) so that direct navigation or a page refresh on any client-side route (`/fees`, `/login`, `/dashboard`, etc.) is served correctly instead of 404ing — required for any single-page app using `BrowserRouter`.
+
 ## Project Structure
 
 ```
 src/
 ├── components/
-│   ├── ui/             # shadcn/ui components (Button, Card, Input, Label, Form, Alert)
-│   ├── layout/         # Header, Footer
-│   └── ScrollToTop.tsx # Scroll + focus reset on route change
+│   ├── ui/               # shadcn/ui components (Button, Card, Input, Label, Form, Alert, Badge, Table)
+│   ├── layout/           # Header, Footer, ProtectedRoute
+│   ├── badges/           # ColourRatingBadge, StatusBadge
+│   └── ScrollToTop.tsx   # Scroll + focus reset on route change
 ├── pages/
-│   ├── public/         # Landing, Fees
-│   └── auth/           # Login
+│   ├── public/           # Landing, Fees
+│   ├── auth/             # Login
+│   └── portal/           # Dashboard (protected)
 ├── context/
-│   └── AuthContext.tsx # Auth state + session persistence
+│   └── AuthContext.tsx   # Auth state + session persistence
 ├── hooks/
-│   └── useAuth.ts      # useAuth() hook
+│   └── useAuth.ts        # useAuth() hook
 ├── types/
-│   └── index.ts        # Shared TypeScript interfaces
+│   └── index.ts          # Shared TypeScript interfaces
 ├── lib/
-│   ├── utils.ts        # cn() class-merge helper
-│   └── constants.ts    # App copy, fees, fines, demo credentials
-├── App.tsx             # Router + providers
-└── main.tsx            # Entry point
+│   ├── utils.ts          # cn(), calculateAnnualFee()
+│   └── constants.ts      # App copy, fees, fines, demo credentials
+├── data/
+│   ├── mockBuildings.ts  # Mock building records
+│   └── mockServiceRequests.ts
+├── App.tsx               # Router + providers
+└── main.tsx              # Entry point
 ```
 
 ## Roadmap
 
-The following are planned but not yet built — an authenticated "owner portal" alongside the existing public pages:
+The following are planned but not yet built, filling out the rest of the authenticated owner portal:
 
-- **Protected routes** — route guard redirecting unauthenticated users to `/login`
-- **Dashboard** — summary cards, alert banners, buildings overview
 - **My Buildings** — searchable/filterable table with colour rating and status badges
 - **Register Building** — multi-step registration form with fee calculation
 - **Renewal** — building selector, invoice, payment form
 - **Service Requests** — submission with urgency detection and history
 - **Compliance Checklist** — interactive checklist with progress tracking
 - **Building Evaluation** — score breakdown, colour rating history
-- **Mock data layer** — sample buildings/service requests under `src/data/`
-- **Additional shadcn/ui components** as new pages require them (table, badge, dialog, select, etc.)
 
 ## License
 

@@ -24,6 +24,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const authUser: AuthUser = {
         loginId,
         ownerName: HARDCODED_CREDENTIALS.ownerName,
+        companyName: HARDCODED_CREDENTIALS.companyName,
       };
       setUser(authUser);
       sessionStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authUser));
