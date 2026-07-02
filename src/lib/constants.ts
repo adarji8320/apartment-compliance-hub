@@ -3,7 +3,6 @@ export const APP_TAGLINE = 'Building Standards & Compliance Management'
 export const CITY_NAME = 'Metropolis'
 export const CONTACT_EMAIL = 'support@compliancehub.fake'
 export const CONTACT_PHONE = '555-123-4567'
-export const ANNUAL_FEE_PER_UNIT = 11.50
 
 export const FEES = {
   annualPerUnit: 11.50,
@@ -28,6 +27,11 @@ export const HARDCODED_CREDENTIALS = {
   loginId: '12345',
   pin: '6789',
   ownerName: 'John Smith',
+  companyName: 'Smith Properties Inc.',
 }
 
 export const AUTH_STORAGE_KEY = 'apartment_compliance_hub_auth'
+
+export const PORTAL_FEES = {
+  annualPerUnit: 30.82,
+}

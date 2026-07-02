@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, useNavigate, Link } from "react-router-dom";
+import { Navigate, useNavigate, useLocation, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -25,9 +25,16 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
+interface LocationState {
+  from?: { pathname: string };
+}
+
 export default function LoginPage() {
   const { isAuthenticated, login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const state = location.state as LocationState | null;
+  const from = state?.from?.pathname ?? "/dashboard";
   const [showPin, setShowPin] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
 
@@ -40,14 +47,14 @@ export default function LoginPage() {
   });
 
   if (isAuthenticated) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to={from} replace />;
   }
 
   function onSubmit(values: LoginFormValues) {
     setAuthError(null);
     const success = login(values.loginId, values.pin);
     if (success) {
-      navigate("/dashboard");
+      navigate(from, { replace: true });
     } else {
       setAuthError("Invalid Login ID or PIN");
     }

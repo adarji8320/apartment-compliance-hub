@@ -8,8 +8,20 @@ import { useAuth } from '@/hooks/useAuth'
 const navButtonClass =
   'inline-flex items-center gap-2 px-4 py-2 border border-white text-white text-sm font-semibold rounded-md hover:bg-white/10 transition-colors'
 
-const navLinks = [
+const publicNavLinks = [
   { label: 'Home', to: '/' },
+  { label: 'Fees & Fines', to: '/fees' },
+]
+
+const portalNavLinks = [
+  { label: 'Home', to: '/' },
+  { label: 'Dashboard', to: '/dashboard' },
+  { label: 'My Buildings', to: '/buildings' },
+  { label: 'Register Building', to: '/register' },
+  { label: 'Renewal', to: '/renewal' },
+  { label: 'Service Requests', to: '/service-requests' },
+  { label: 'Compliance', to: '/compliance' },
+  { label: 'Evaluation', to: '/evaluation' },
   { label: 'Fees & Fines', to: '/fees' },
 ]
 
@@ -17,6 +29,8 @@ export default function Header() {
   const [open, setOpen] = useState(false)
   const { isAuthenticated, user, logout } = useAuth()
   const navigate = useNavigate()
+
+  const navLinks = isAuthenticated ? portalNavLinks : publicNavLinks
 
   function handleLogout() {
     logout()
@@ -26,13 +40,13 @@ export default function Header() {
 
   return (
     <header className="bg-brand sticky top-0 z-50 w-full border-b text-white shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="text-lg font-bold tracking-tight hover:opacity-90">
             {APP_NAME}
           </Link>
 
-          <nav aria-label="Main navigation" className="hidden md:flex items-center gap-6 text-sm font-medium">
+          <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-4 text-sm font-medium">
             {navLinks.map((link) => (
               <Link
                 key={link.to}
@@ -58,7 +72,7 @@ export default function Header() {
           </nav>
 
           <button
-            className="md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded"
+            className="lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
             aria-expanded={open}
@@ -71,7 +85,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav aria-label="Mobile navigation" className="md:hidden bg-brand/90 px-4 pb-4 flex flex-col gap-3 text-sm font-medium">
+        <nav aria-label="Mobile navigation" className="lg:hidden bg-brand/90 px-4 pb-4 flex flex-col gap-3 text-sm font-medium">
           {navLinks.map((link) => (
             <Link
               key={link.to}

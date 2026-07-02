@@ -15,7 +15,7 @@ import {
   CITY_NAME,
   CONTACT_EMAIL,
   CONTACT_PHONE,
-  ANNUAL_FEE_PER_UNIT,
+  FEES,
 } from '@/lib/constants'
 import { useAuth } from '@/hooks/useAuth'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
@@ -27,7 +27,7 @@ export default function Landing() {
     <div>
       {/* Hero */}
       <section className="bg-brand text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="max-w-3xl">
             <div className="mb-3 flex items-center gap-2">
               <Building2 className="h-8 w-8" aria-hidden="true" />
@@ -62,7 +62,7 @@ export default function Landing() {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
         {/* Alert */}
         <Alert variant="info" className="mb-8">
@@ -163,9 +163,9 @@ export default function Landing() {
             </div>
             <p className="text-sm text-gray-700">
               The annual registration fee is{' '}
-              <strong>${ANNUAL_FEE_PER_UNIT.toFixed(2)} per residential unit</strong>.
+              <strong>${FEES.annualPerUnit.toFixed(2)} per residential unit</strong>.
               For example, a 40-unit building pays{' '}
-              <strong>${(40 * ANNUAL_FEE_PER_UNIT).toFixed(2)}</strong> per year.
+              <strong>${(40 * FEES.annualPerUnit).toFixed(2)}</strong> per year.
             </p>
             <div className="mt-4">
               <Link to="/fees" className="text-sm text-brand underline underline-offset-2 hover:text-brand/80">
