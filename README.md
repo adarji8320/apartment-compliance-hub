@@ -1,75 +1,99 @@
-# React + TypeScript + Vite
+# Apartment Compliance Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **Demo disclaimer:** This is a practice/portfolio project simulating an apartment building compliance & registration program for a fictional city ("Metropolis"). It is not affiliated with any real municipality.
 
-Currently, two official plugins are available:
+A React + TypeScript application for managing apartment building compliance registration, annual fees, fines, and colour-coded compliance status — modeled after municipal building-standards programs.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Demo Login
 
-## React Compiler
+| Field    | Value   |
+| -------- | ------- |
+| Login ID | `12345` |
+| PIN      | `6789`  |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+| Technology            | Purpose                                                                     |
+| --------------------- | --------------------------------------------------------------------------- |
+| React 19              | UI framework                                                                |
+| TypeScript            | Type safety                                                                 |
+| Vite                  | Build tool & dev server                                                     |
+| Tailwind CSS 3        | Utility-first styling                                                       |
+| shadcn/ui             | Component library (Radix UI primitives, "default" style / slate base color) |
+| React Router 7        | Client-side routing                                                         |
+| React Hook Form + Zod | Form state management & schema validation                                   |
+| lucide-react          | Icons                                                                       |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Current Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Landing page** — program overview, eligibility criteria, colour-coded compliance status legend (Green/Yellow/Red), fee teaser, contact info
+- **Fees & Fines** — full fee schedule and common fine amounts
+- **Login** — Zod-validated form, mock credentials, PIN show/hide toggle, session-based auth
+- **Auth state everywhere** — Header, Footer, and Landing all reflect signed-in/out state (Login ⇄ Logout, "Register Your Building" hidden once signed in, hero CTA becomes "Go to Dashboard")
+- **Accessibility** — WCAG 2.x AA-targeted: verified colour contrast, skip-to-content link, focus management on route change, `aria-hidden` on decorative icons, labelled landmarks, accessible form errors
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Prerequisites
 
+- Node.js 18+ and npm
+
+### Installation
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Other Commands
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build    # Type-check and production build
+npm run lint     # Run ESLint
+npm run preview  # Preview production build
+```
+
+## Project Structure
 
 ```
+src/
+├── components/
+│   ├── ui/             # shadcn/ui components (Button, Card, Input, Label, Form, Alert)
+│   ├── layout/         # Header, Footer
+│   └── ScrollToTop.tsx # Scroll + focus reset on route change
+├── pages/
+│   ├── public/         # Landing, Fees
+│   └── auth/           # Login
+├── context/
+│   └── AuthContext.tsx # Auth state + session persistence
+├── hooks/
+│   └── useAuth.ts      # useAuth() hook
+├── types/
+│   └── index.ts        # Shared TypeScript interfaces
+├── lib/
+│   ├── utils.ts        # cn() class-merge helper
+│   └── constants.ts    # App copy, fees, fines, demo credentials
+├── App.tsx             # Router + providers
+└── main.tsx            # Entry point
+```
+
+## Roadmap
+
+The following are planned but not yet built — an authenticated "owner portal" alongside the existing public pages:
+
+- **Protected routes** — route guard redirecting unauthenticated users to `/login`
+- **Dashboard** — summary cards, alert banners, buildings overview
+- **My Buildings** — searchable/filterable table with colour rating and status badges
+- **Register Building** — multi-step registration form with fee calculation
+- **Renewal** — building selector, invoice, payment form
+- **Service Requests** — submission with urgency detection and history
+- **Compliance Checklist** — interactive checklist with progress tracking
+- **Building Evaluation** — score breakdown, colour rating history
+- **Mock data layer** — sample buildings/service requests under `src/data/`
+- **Additional shadcn/ui components** as new pages require them (table, badge, dialog, select, etc.)
+
+## License
+
+Personal practice project — not for production or commercial use.

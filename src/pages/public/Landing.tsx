@@ -7,6 +7,7 @@ import {
   Phone,
   Mail,
   DollarSign,
+  Info,
 } from 'lucide-react'
 import {
   APP_NAME,
@@ -16,16 +17,20 @@ import {
   CONTACT_PHONE,
   ANNUAL_FEE_PER_UNIT,
 } from '@/lib/constants'
+import { useAuth } from '@/hooks/useAuth'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 
 export default function Landing() {
+  const { isAuthenticated } = useAuth()
+
   return (
     <div>
       {/* Hero */}
-      <section className="bg-primary text-white">
+      <section className="bg-brand text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="max-w-3xl">
             <div className="mb-3 flex items-center gap-2">
-              <Building2 className="h-8 w-8" />
+              <Building2 className="h-8 w-8" aria-hidden="true" />
               <span className="text-sm font-medium text-white/70 uppercase tracking-wider">
                 City of {CITY_NAME}
               </span>
@@ -38,17 +43,19 @@ export default function Landing() {
               property standards for the health, safety, and well-being of tenants.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
+              {!isAuthenticated && (
+                <Link
+                  to="/register"
+                  className="px-6 py-3 bg-white text-brand font-semibold rounded-md hover:bg-gray-100 transition-colors"
+                >
+                  Register Your Building
+                </Link>
+              )}
               <Link
-                to="/register"
-                className="px-6 py-3 bg-white text-primary font-semibold rounded-md hover:bg-gray-100 transition-colors"
-              >
-                Register Your Building
-              </Link>
-              <Link
-                to="/login"
+                to={isAuthenticated ? '/dashboard' : '/login'}
                 className="px-6 py-3 border border-white text-white font-semibold rounded-md hover:bg-white/10 transition-colors"
               >
-                Owner Portal Login
+                {isAuthenticated ? 'Go to Dashboard' : 'Owner Portal Login'}
               </Link>
             </div>
           </div>
@@ -58,16 +65,14 @@ export default function Landing() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
         {/* Alert */}
-        <div className="mb-8 flex gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4">
-          <span className="mt-0.5 text-blue-600">ℹ️</span>
-          <div>
-            <p className="font-semibold text-blue-800">NEW — July 2026: Updated Compliance Standards</p>
-            <p className="mt-1 text-sm text-blue-700">
-              As of July 1, 2026, all registered apartment buildings must display a colour-coded
-              compliance sign at the main entrance indicating their current standing.
-            </p>
-          </div>
-        </div>
+        <Alert variant="info" className="mb-8">
+          <Info className="h-4 w-4" aria-hidden="true" />
+          <AlertTitle>NEW — July 2026: Updated Compliance Standards</AlertTitle>
+          <AlertDescription>
+            As of July 1, 2026, all registered apartment buildings must display a colour-coded
+            compliance sign at the main entrance indicating their current standing.
+          </AlertDescription>
+        </Alert>
 
         {/* Eligibility */}
         <section className="mb-12">
@@ -92,21 +97,21 @@ export default function Landing() {
           <h2 className="text-xl font-semibold text-gray-900 mb-6">How It Works</h2>
           <div className="grid gap-6 md:grid-cols-3">
             <div className="rounded-lg border p-6">
-              <ClipboardList className="h-8 w-8 text-primary mb-3" />
+              <ClipboardList className="h-8 w-8 text-brand mb-3" aria-hidden="true" />
               <h3 className="font-semibold text-gray-900 mb-1">Register</h3>
               <p className="text-sm text-gray-600">
                 Submit your building registration and receive your Owner ID and PIN within 5–7 business days.
               </p>
             </div>
             <div className="rounded-lg border p-6">
-              <RefreshCw className="h-8 w-8 text-primary mb-3" />
+              <RefreshCw className="h-8 w-8 text-brand mb-3" aria-hidden="true" />
               <h3 className="font-semibold text-gray-900 mb-1">Renew Annually</h3>
               <p className="text-sm text-gray-600">
                 Log in each year before July 31 to renew your registration and pay the annual fee online.
               </p>
             </div>
             <div className="rounded-lg border p-6">
-              <ShieldCheck className="h-8 w-8 text-primary mb-3" />
+              <ShieldCheck className="h-8 w-8 text-brand mb-3" aria-hidden="true" />
               <h3 className="font-semibold text-gray-900 mb-1">Stay Compliant</h3>
               <p className="text-sm text-gray-600">
                 Track evaluations, respond to service requests, and maintain your building's compliance score.
@@ -123,20 +128,20 @@ export default function Landing() {
           </p>
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="rounded-lg border-2 border-green-300 bg-green-50 p-5 text-center">
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-green-500">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-green-700">
                 <span className="text-xl font-bold text-white">G</span>
               </div>
               <h3 className="font-semibold text-green-800">Green</h3>
               <p className="mt-1 text-sm text-green-700">Good Standing</p>
-              <p className="mt-1 text-xs text-green-600">Score: 75 and above</p>
+              <p className="mt-1 text-xs text-green-700">Score: 75 and above</p>
             </div>
             <div className="rounded-lg border-2 border-yellow-300 bg-yellow-50 p-5 text-center">
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-yellow-500">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-yellow-700">
                 <span className="text-xl font-bold text-white">Y</span>
               </div>
               <h3 className="font-semibold text-yellow-800">Yellow</h3>
               <p className="mt-1 text-sm text-yellow-700">Needs Improvement</p>
-              <p className="mt-1 text-xs text-yellow-600">Score: 50–74</p>
+              <p className="mt-1 text-xs text-yellow-700">Score: 50–74</p>
             </div>
             <div className="rounded-lg border-2 border-red-300 bg-red-50 p-5 text-center">
               <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-red-500">
@@ -144,7 +149,7 @@ export default function Landing() {
               </div>
               <h3 className="font-semibold text-red-800">Red</h3>
               <p className="mt-1 text-sm text-red-700">Significant Issues</p>
-              <p className="mt-1 text-xs text-red-600">Score: below 50</p>
+              <p className="mt-1 text-xs text-red-700">Score: below 50</p>
             </div>
           </div>
         </section>
@@ -153,7 +158,7 @@ export default function Landing() {
         <section className="mb-12">
           <div className="rounded-lg border p-6">
             <div className="flex items-center gap-2 mb-3">
-              <DollarSign className="h-5 w-5 text-primary" />
+              <DollarSign className="h-5 w-5 text-brand" aria-hidden="true" />
               <h2 className="text-lg font-semibold text-gray-900">Annual Registration Fee</h2>
             </div>
             <p className="text-sm text-gray-700">
@@ -163,7 +168,7 @@ export default function Landing() {
               <strong>${(40 * ANNUAL_FEE_PER_UNIT).toFixed(2)}</strong> per year.
             </p>
             <div className="mt-4">
-              <Link to="/fees" className="text-sm text-primary underline underline-offset-2 hover:text-primary/80">
+              <Link to="/fees" className="text-sm text-brand underline underline-offset-2 hover:text-brand/80">
                 View full fee schedule and fines →
               </Link>
             </div>
@@ -178,17 +183,17 @@ export default function Landing() {
               href={`mailto:${CONTACT_EMAIL}`}
               className="flex items-center gap-3 rounded-lg border p-4 hover:bg-gray-50 transition-colors"
             >
-              <Mail className="h-5 w-5 text-primary shrink-0" />
+              <Mail className="h-5 w-5 text-brand shrink-0" aria-hidden="true" />
               <div>
                 <p className="text-xs text-gray-500">Email</p>
-                <p className="text-sm font-medium text-primary">{CONTACT_EMAIL}</p>
+                <p className="text-sm font-medium text-brand">{CONTACT_EMAIL}</p>
               </div>
             </a>
             <a
               href={`tel:${CONTACT_PHONE}`}
               className="flex items-center gap-3 rounded-lg border p-4 hover:bg-gray-50 transition-colors"
             >
-              <Phone className="h-5 w-5 text-primary shrink-0" />
+              <Phone className="h-5 w-5 text-brand shrink-0" aria-hidden="true" />
               <div>
                 <p className="text-xs text-gray-500">Phone</p>
                 <p className="text-sm font-medium">{CONTACT_PHONE}</p>
