@@ -8,6 +8,7 @@ import Landing from '@/pages/public/Landing'
 import Fees from '@/pages/public/Fees'
 import LoginPage from '@/pages/auth/LoginPage'
 import DashboardPage from '@/pages/portal/DashboardPage'
+import BuildingsPage from '@/pages/portal/BuildingsPage'
 
 const PUBLIC_PATHS = ['/', '/fees', '/login']
 
@@ -34,6 +35,14 @@ function AppLayout() {
             element={
               <ProtectedRoute>
                 <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/buildings"
+            element={
+              <ProtectedRoute>
+                <BuildingsPage />
               </ProtectedRoute>
             }
           />

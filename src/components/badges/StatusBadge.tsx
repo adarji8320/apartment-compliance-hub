@@ -9,6 +9,8 @@ interface StatusBadgeProps {
 const statusConfig: Record<RegistrationStatus, string> = {
   Active: 'bg-green-100 text-green-800 border border-green-300',
   'Renewal Due': 'bg-orange-100 text-orange-800 border border-orange-300',
+  Pending: 'bg-blue-100 text-blue-800 border border-blue-300',
+  Expired: 'bg-red-100 text-red-800 border border-red-300',
 }
 
 export function StatusBadge({ status, className }: StatusBadgeProps) {
