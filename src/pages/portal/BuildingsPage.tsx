@@ -38,7 +38,7 @@ export default function BuildingsPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="relative flex-1 max-w-sm">
           <Search
-            className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+            className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
             aria-hidden="true"
           />
           <Input
@@ -97,7 +97,7 @@ export default function BuildingsPage() {
             <div className="flex flex-col items-center justify-center py-16 text-center">
               <Search className="mb-3 h-10 w-10 text-gray-300" aria-hidden="true" />
               <p className="font-medium text-gray-500">No buildings match your filters</p>
-              <p className="mt-1 text-sm text-gray-400">Try adjusting your search or filter criteria</p>
+              <p className="mt-1 text-sm text-gray-500">Try adjusting your search or filter criteria</p>
               <Button
                 variant="outline"
                 size="sm"
