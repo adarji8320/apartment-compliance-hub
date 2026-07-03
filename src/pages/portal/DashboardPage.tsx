@@ -10,6 +10,7 @@ import {
   ClipboardCheck,
 } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
+import { useBuildings } from '@/hooks/useBuildings'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
@@ -23,17 +24,13 @@ import {
 } from '@/components/ui/table'
 import { ColourRatingBadge } from '@/components/badges/ColourRatingBadge'
 import { StatusBadge } from '@/components/badges/StatusBadge'
-import { MOCK_BUILDINGS } from '@/data/mockBuildings'
 import { MOCK_SERVICE_REQUESTS } from '@/data/mockServiceRequests'
+import { formatCurrency, formatDate } from '@/lib/utils'
 
 export default function DashboardPage() {
   const { user } = useAuth()
-
-  const totalBuildings = MOCK_BUILDINGS.length
-  const renewalDueCount = MOCK_BUILDINGS.filter((b) => b.status === 'Renewal Due').length
-  const averageScore = Math.round(
-    MOCK_BUILDINGS.reduce((sum, b) => sum + b.score, 0) / MOCK_BUILDINGS.length
-  )
+  const { allBuildings, stats } = useBuildings()
+  const { totalBuildings, renewalDue: renewalDueCount, avgScore: averageScore } = stats
 
   const openServiceRequests = MOCK_SERVICE_REQUESTS.filter((r) => r.status !== 'resolved')
   const urgentOpen = MOCK_SERVICE_REQUESTS.filter(
@@ -186,7 +183,7 @@ export default function DashboardPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {MOCK_BUILDINGS.map((building) => (
+                {allBuildings.map((building) => (
                   <TableRow key={building.id}>
                     <TableCell className="font-medium">{building.address}</TableCell>
                     <TableCell className="text-center">{building.units}</TableCell>
@@ -196,9 +193,9 @@ export default function DashboardPage() {
                     <TableCell>
                       <StatusBadge status={building.status} />
                     </TableCell>
-                    <TableCell className="text-sm text-gray-600">{building.renewalDate}</TableCell>
+                    <TableCell className="text-sm text-gray-600">{formatDate(building.renewalDate)}</TableCell>
                     <TableCell className="tabular-nums text-sm">
-                      ${building.annualFee.toFixed(2)}
+                      {formatCurrency(building.annualFee)}
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
