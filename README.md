@@ -25,16 +25,19 @@ A React + TypeScript application for managing apartment building compliance regi
 | React Router 7        | Client-side routing                                                         |
 | React Hook Form + Zod | Form state management & schema validation                                   |
 | lucide-react          | Icons                                                                       |
+| Prettier              | Code formatting                                                             |
 | Vercel                | Hosting & deployment                                                        |
 
 ## Current Features
 
 - **Landing page** — program overview, eligibility criteria, colour-coded compliance status legend (Green/Yellow/Red), fee teaser, contact info
 - **Fees & Fines** — full fee schedule and common fine amounts
-- **Login** — Zod-validated form, mock credentials, PIN show/hide toggle, session-based auth
+- **Login** — Zod-validated form (numeric Login ID/PIN), mock credentials, PIN show/hide toggle, session-based auth
 - **Protected routes** — unauthenticated visitors are redirected to `/login` and returned to their originally-requested page after signing in
 - **Dashboard** (owner portal) — welcome banner, renewal/compliance/service-request alerts, summary cards, quick actions, buildings overview table with colour rating and status badges
-- **Auth state everywhere** — Header, Footer, and Landing all reflect signed-in/out state (Login ⇄ Logout, "Register Your Building" hidden once signed in, hero CTA becomes "Go to Dashboard"); Footer is hidden on authenticated portal pages, matching the reference app
+- **My Buildings** — searchable, filterable (by status and colour rating) table of registered buildings with an empty state
+- **Register a Building** — 4-step wizard (property details, owner details, review, confirmation) with per-step validation, clickable step navigation to revisit completed steps, phone number auto-formatting, and a generated reference number
+- **Auth state everywhere** — Header, Footer, and Landing all reflect signed-in/out state (Login ⇄ Logout, "Register Your Building" hidden once signed in, hero CTA becomes "Go to Dashboard"); Footer is hidden on authenticated portal pages
 - **Accessibility** — WCAG 2.x AA-targeted: verified colour contrast, skip-to-content link, focus management on route change, `aria-hidden` on decorative icons, labelled landmarks, accessible form errors
 
 ## Getting Started
@@ -55,9 +58,11 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 ### Other Commands
 
 ```bash
-npm run build    # Type-check and production build
-npm run lint     # Run ESLint
-npm run preview  # Preview production build
+npm run build           # Type-check and production build
+npm run lint            # Run ESLint
+npm run format          # Format all files with Prettier
+npm run format:check    # Check formatting without writing changes
+npm run preview         # Preview production build
 ```
 
 ## Deployment
@@ -71,23 +76,24 @@ Hosted on [Vercel](https://vercel.com), connected to this repository's `main` br
 ```
 src/
 ├── components/
-│   ├── ui/               # shadcn/ui components (Button, Card, Input, Label, Form, Alert, Badge, Table)
+│   ├── ui/               # shadcn/ui components (Button, Card, Input, Label, Alert, Badge, Table, Select, Checkbox, Separator)
 │   ├── layout/           # Header, Footer, ProtectedRoute
 │   ├── badges/           # ColourRatingBadge, StatusBadge
 │   └── ScrollToTop.tsx   # Scroll + focus reset on route change
 ├── pages/
 │   ├── public/           # Landing, Fees
 │   ├── auth/             # Login
-│   └── portal/           # Dashboard (protected)
+│   └── portal/           # Dashboard, My Buildings, Register (all protected)
 ├── context/
 │   └── AuthContext.tsx   # Auth state + session persistence
 ├── hooks/
-│   └── useAuth.ts        # useAuth() hook
+│   ├── useAuth.ts        # useAuth() hook
+│   └── useBuildings.ts   # Search/filter state + stats over mock buildings
 ├── types/
 │   └── index.ts          # Shared TypeScript interfaces
 ├── lib/
-│   ├── utils.ts          # cn(), calculateAnnualFee()
-│   └── constants.ts      # App copy, fees, fines, demo credentials
+│   ├── utils.ts          # cn(), calculateAnnualFee(), formatCurrency(), formatDate(), formatPhoneNumber(), generateReferenceNumber()
+│   └── constants.ts      # App copy, fees, fines, demo credentials, wards
 ├── data/
 │   ├── mockBuildings.ts  # Mock building records
 │   └── mockServiceRequests.ts
@@ -99,8 +105,6 @@ src/
 
 The following are planned but not yet built, filling out the rest of the authenticated owner portal:
 
-- **My Buildings** — searchable/filterable table with colour rating and status badges
-- **Register Building** — multi-step registration form with fee calculation
 - **Renewal** — building selector, invoice, payment form
 - **Service Requests** — submission with urgency detection and history
 - **Compliance Checklist** — interactive checklist with progress tracking

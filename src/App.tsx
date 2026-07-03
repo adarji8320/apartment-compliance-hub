@@ -1,20 +1,21 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { AuthProvider } from '@/context/AuthContext'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
-import ScrollToTop from '@/components/ScrollToTop'
-import { ProtectedRoute } from '@/components/layout/ProtectedRoute'
-import Landing from '@/pages/public/Landing'
-import Fees from '@/pages/public/Fees'
-import LoginPage from '@/pages/auth/LoginPage'
-import DashboardPage from '@/pages/portal/DashboardPage'
-import BuildingsPage from '@/pages/portal/BuildingsPage'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { AuthProvider } from '@/context/AuthContext';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import ScrollToTop from '@/components/ScrollToTop';
+import { ProtectedRoute } from '@/components/layout/ProtectedRoute';
+import Landing from '@/pages/public/Landing';
+import Fees from '@/pages/public/Fees';
+import LoginPage from '@/pages/auth/LoginPage';
+import DashboardPage from '@/pages/portal/DashboardPage';
+import BuildingsPage from '@/pages/portal/BuildingsPage';
+import RegisterPage from '@/pages/portal/RegisterPage';
 
-const PUBLIC_PATHS = ['/', '/fees', '/login']
+const PUBLIC_PATHS = ['/', '/fees', '/login'];
 
 function AppLayout() {
-  const location = useLocation()
-  const showFooter = PUBLIC_PATHS.includes(location.pathname)
+  const location = useLocation();
+  const showFooter = PUBLIC_PATHS.includes(location.pathname);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -46,11 +47,19 @@ function AppLayout() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/register"
+            element={
+              <ProtectedRoute>
+                <RegisterPage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </main>
       {showFooter && <Footer />}
     </div>
-  )
+  );
 }
 
 function App() {
@@ -61,7 +70,7 @@ function App() {
         <AppLayout />
       </BrowserRouter>
     </AuthProvider>
-  )
+  );
 }
 
-export default App
+export default App;

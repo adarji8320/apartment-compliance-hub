@@ -1,33 +1,43 @@
-import { DollarSign, AlertTriangle, Info } from 'lucide-react'
-import { FEES, FINES, CITY_NAME } from '@/lib/constants'
-import { Alert, AlertDescription } from '@/components/ui/alert'
+import { DollarSign, AlertTriangle, Info } from 'lucide-react';
+import { FEES, FINES, CITY_NAME } from '@/lib/constants';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const feeSchedule = [
-  { item: 'Annual registration / renewal', amount: `$${FEES.annualPerUnit.toFixed(2)} per residential unit` },
+  {
+    item: 'Annual registration / renewal',
+    amount: `$${FEES.annualPerUnit.toFixed(2)} per residential unit`,
+  },
   { item: 'Building audit administration', amount: `$${FEES.buildingAuditAdmin.toFixed(2)}` },
   { item: 'Audit inspection', amount: `$${FEES.auditInspectionPerHour.toFixed(2)}/hr per officer` },
   { item: 'Re-evaluation', amount: `$${FEES.reEvaluation.toFixed(2)} per building` },
-  { item: 'Colour-coded sign replacement', amount: `$${FEES.signReplacementMin.toFixed(2)}–$${FEES.signReplacementMax.toFixed(2)} + tax` },
-]
+  {
+    item: 'Colour-coded sign replacement',
+    amount: `$${FEES.signReplacementMin.toFixed(2)}–$${FEES.signReplacementMax.toFixed(2)} + tax`,
+  },
+];
 
 const finesSchedule = [
   { offence: 'Fail to register building', fine: FINES.failToRegister, max: false },
   { offence: 'Registration not up to date', fine: FINES.registrationNotUpToDate, max: false },
   { offence: 'No tenant notification board', fine: FINES.noNotificationBoard, max: false },
-  { offence: 'Urgent request not answered within 24 hours', fine: FINES.urgentRequestNotAnswered, max: false },
+  {
+    offence: 'Urgent request not answered within 24 hours',
+    fine: FINES.urgentRequestNotAnswered,
+    max: false,
+  },
   { offence: 'No pest inspection every 30 days', fine: FINES.noPestInspection, max: false },
   { offence: 'Renting unit with pest infestation', fine: FINES.rentingWithPests, max: false },
   { offence: 'Court conviction', fine: FINES.courtConvictionMax, max: true },
-]
+];
 
 export default function Fees() {
   return (
     <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Fees &amp; Fines</h1>
         <p className="mt-1 text-gray-600">
-          2026 {CITY_NAME} Apartment Compliance fee schedule and common fine amounts.
+          {new Date().getFullYear()} {CITY_NAME} Apartment Compliance fee schedule and common fine
+          amounts.
         </p>
       </div>
 
@@ -35,8 +45,8 @@ export default function Fees() {
       <Alert variant="info" className="mb-6">
         <Info className="h-4 w-4" aria-hidden="true" />
         <AlertDescription>
-          Fees are waived for qualifying non-profit social housing providers.
-          Contact us to confirm eligibility.
+          Fees are waived for qualifying non-profit social housing providers. Contact us to confirm
+          eligibility.
         </AlertDescription>
       </Alert>
 
@@ -44,13 +54,19 @@ export default function Fees() {
       <div className="mb-8 rounded-lg border overflow-hidden">
         <div className="flex items-center gap-2 px-6 py-4 border-b bg-white">
           <DollarSign className="h-5 w-5 text-brand" aria-hidden="true" />
-          <h2 className="text-lg font-semibold text-gray-900">2026 Fee Schedule</h2>
+          <h2 className="text-lg font-semibold text-gray-900">
+            {new Date().getFullYear()} Fee Schedule
+          </h2>
         </div>
         <table className="w-full text-sm">
           <thead className="bg-gray-50">
             <tr>
-              <th scope="col" className="text-left px-6 py-3 font-semibold text-gray-700">Fee Item</th>
-              <th scope="col" className="text-right px-6 py-3 font-semibold text-gray-700">Amount</th>
+              <th scope="col" className="text-left px-6 py-3 font-semibold text-gray-700">
+                Fee Item
+              </th>
+              <th scope="col" className="text-right px-6 py-3 font-semibold text-gray-700">
+                Amount
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 bg-white">
@@ -73,8 +89,12 @@ export default function Fees() {
         <table className="w-full text-sm">
           <thead className="bg-gray-50">
             <tr>
-              <th scope="col" className="text-left px-6 py-3 font-semibold text-gray-700">Offence</th>
-              <th scope="col" className="text-right px-6 py-3 font-semibold text-gray-700">Fine</th>
+              <th scope="col" className="text-left px-6 py-3 font-semibold text-gray-700">
+                Offence
+              </th>
+              <th scope="col" className="text-right px-6 py-3 font-semibold text-gray-700">
+                Fine
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 bg-white">
@@ -94,5 +114,5 @@ export default function Fees() {
         All amounts in Canadian dollars. Fees and fines subject to change without notice.
       </p>
     </div>
-  )
+  );
 }

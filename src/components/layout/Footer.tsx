@@ -1,19 +1,19 @@
-import { Link, useNavigate } from 'react-router-dom'
-import { APP_NAME, APP_TAGLINE, CITY_NAME, CONTACT_EMAIL, CONTACT_PHONE } from '@/lib/constants'
-import { useAuth } from '@/hooks/useAuth'
+import { Link, useNavigate } from 'react-router-dom';
+import { APP_NAME, APP_TAGLINE, CITY_NAME, CONTACT_EMAIL, CONTACT_PHONE } from '@/lib/constants';
+import { useAuth } from '@/hooks/useAuth';
 
 const quickLinks = [
   { label: 'Home', to: '/' },
   { label: 'Fees & Fines', to: '/fees' },
-]
+];
 
 export default function Footer() {
-  const { isAuthenticated, logout } = useAuth()
-  const navigate = useNavigate()
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
 
   function handleLogout() {
-    logout()
-    navigate('/')
+    logout();
+    navigate('/');
   }
 
   return (
@@ -27,11 +27,16 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold mb-3 uppercase tracking-wide text-white/70">Quick Links</h4>
+            <h4 className="text-sm font-semibold mb-3 uppercase tracking-wide text-white/70">
+              Quick Links
+            </h4>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.to}>
-                  <Link to={link.to} className="text-sm text-white/70 hover:text-brand-secondary transition-colors">
+                  <Link
+                    to={link.to}
+                    className="text-sm text-white/70 hover:text-brand-secondary transition-colors"
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -45,7 +50,10 @@ export default function Footer() {
                     Logout
                   </button>
                 ) : (
-                  <Link to="/login" className="text-sm text-white/70 hover:text-brand-secondary transition-colors">
+                  <Link
+                    to="/login"
+                    className="text-sm text-white/70 hover:text-brand-secondary transition-colors"
+                  >
                     Login
                   </Link>
                 )}
@@ -54,11 +62,19 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold mb-3 uppercase tracking-wide text-white/70">Contact</h4>
-            <a href={`mailto:${CONTACT_EMAIL}`} className="block text-sm text-white/70 hover:text-brand-secondary transition-colors">
+            <h4 className="text-sm font-semibold mb-3 uppercase tracking-wide text-white/70">
+              Contact
+            </h4>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="block text-sm text-white/70 hover:text-brand-secondary transition-colors"
+            >
               {CONTACT_EMAIL}
             </a>
-            <a href={`tel:${CONTACT_PHONE}`} className="block text-sm text-white/70 hover:text-brand-secondary transition-colors mt-1">
+            <a
+              href={`tel:${CONTACT_PHONE}`}
+              className="block text-sm text-white/70 hover:text-brand-secondary transition-colors mt-1"
+            >
               {CONTACT_PHONE}
             </a>
           </div>
@@ -69,5 +85,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

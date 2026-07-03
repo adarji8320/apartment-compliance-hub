@@ -1,13 +1,13 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
-import { PORTAL_FEES } from "@/lib/constants"
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+import { FEES } from '@/lib/constants';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export function calculateAnnualFee(units: number): number {
-  return Math.round(units * PORTAL_FEES.annualPerUnit * 100) / 100
+  return Math.round(units * FEES.annualPerUnit * 100) / 100;
 }
 
 export function formatCurrency(amount: number): string {
@@ -15,11 +15,27 @@ export function formatCurrency(amount: number): string {
     style: 'currency',
     currency: 'CAD',
     minimumFractionDigits: 2,
-  }).format(amount)
+  }).format(amount);
 }
 
 export function formatDate(dateStr: string): string {
-  const [year, month, day] = dateStr.split('-').map(Number)
-  const date = new Date(year, month - 1, day)
-  return date.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
+  const [year, month, day] = dateStr.split('-').map(Number);
+  const date = new Date(year, month - 1, day);
+  return date.toLocaleDateString('en-CA', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+export function generateReferenceNumber(): string {
+  const rand = Math.floor(10000 + Math.random() * 90000);
+  return `ACH-${new Date().getFullYear()}-${rand}`;
+}
+
+export function formatPhoneNumber(value: string): string {
+  const digits = value.replace(/\D/g, '').slice(0, 10);
+  if (digits.length <= 3) return digits;
+  if (digits.length <= 6) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+  return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
 }

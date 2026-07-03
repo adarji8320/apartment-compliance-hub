@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom'
-import { Search, SlidersHorizontal } from 'lucide-react'
-import { useBuildings } from '@/hooks/useBuildings'
-import { Card, CardContent } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { ColourRatingBadge } from '@/components/badges/ColourRatingBadge'
-import { StatusBadge } from '@/components/badges/StatusBadge'
+import { Link } from 'react-router-dom';
+import { Search, SlidersHorizontal } from 'lucide-react';
+import { useBuildings } from '@/hooks/useBuildings';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { ColourRatingBadge } from '@/components/badges/ColourRatingBadge';
+import { StatusBadge } from '@/components/badges/StatusBadge';
 import {
   Table,
   TableBody,
@@ -13,19 +13,19 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
+} from '@/components/ui/table';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { formatCurrency, formatDate } from '@/lib/utils'
-import type { ColourRating, RegistrationStatus } from '@/types'
+} from '@/components/ui/select';
+import { formatCurrency, formatDate } from '@/lib/utils';
+import type { ColourRating, RegistrationStatus } from '@/types';
 
 export default function BuildingsPage() {
-  const { buildings, allBuildings, filters, setFilters } = useBuildings()
+  const { buildings, allBuildings, filters, setFilters } = useBuildings();
 
   return (
     <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-6">
@@ -97,7 +97,9 @@ export default function BuildingsPage() {
             <div className="flex flex-col items-center justify-center py-16 text-center">
               <Search className="mb-3 h-10 w-10 text-gray-300" aria-hidden="true" />
               <p className="font-medium text-gray-500">No buildings match your filters</p>
-              <p className="mt-1 text-sm text-gray-500">Try adjusting your search or filter criteria</p>
+              <p className="mt-1 text-sm text-gray-500">
+                Try adjusting your search or filter criteria
+              </p>
               <Button
                 variant="outline"
                 size="sm"
@@ -112,14 +114,22 @@ export default function BuildingsPage() {
               <TableHeader>
                 <TableRow className="bg-gray-50">
                   <TableHead scope="col">Building Address</TableHead>
-                  <TableHead scope="col" className="text-center">Units</TableHead>
-                  <TableHead scope="col" className="text-center">Storeys</TableHead>
+                  <TableHead scope="col" className="text-center">
+                    Units
+                  </TableHead>
+                  <TableHead scope="col" className="text-center">
+                    Storeys
+                  </TableHead>
                   <TableHead scope="col">Colour Rating</TableHead>
                   <TableHead scope="col">Status</TableHead>
-                  <TableHead scope="col" className="text-center">Score</TableHead>
+                  <TableHead scope="col" className="text-center">
+                    Score
+                  </TableHead>
                   <TableHead scope="col">Annual Fee</TableHead>
                   <TableHead scope="col">Renewal Date</TableHead>
-                  <TableHead scope="col" className="text-right">Actions</TableHead>
+                  <TableHead scope="col" className="text-right">
+                    Actions
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -128,7 +138,9 @@ export default function BuildingsPage() {
                     <TableCell>
                       <div>
                         <p className="font-medium">{b.address}</p>
-                        <p className="text-xs text-gray-500">{b.city} {b.postalCode}</p>
+                        <p className="text-xs text-gray-500">
+                          {b.city} {b.postalCode}
+                        </p>
                       </div>
                     </TableCell>
                     <TableCell className="text-center">{b.units}</TableCell>
@@ -140,18 +152,28 @@ export default function BuildingsPage() {
                       <StatusBadge status={b.status} />
                     </TableCell>
                     <TableCell className="text-center font-semibold">{b.score}</TableCell>
-                    <TableCell className="tabular-nums text-sm">{formatCurrency(b.annualFee)}</TableCell>
-                    <TableCell className="text-sm text-gray-600">{formatDate(b.renewalDate)}</TableCell>
+                    <TableCell className="tabular-nums text-sm">
+                      {formatCurrency(b.annualFee)}
+                    </TableCell>
+                    <TableCell className="text-sm text-gray-600">
+                      {formatDate(b.renewalDate)}
+                    </TableCell>
                     <TableCell>
                       <div className="flex justify-end gap-1">
                         <Link to="/evaluation">
-                          <Button variant="ghost" size="sm" className="text-xs">Eval</Button>
+                          <Button variant="ghost" size="sm" className="text-xs">
+                            Eval
+                          </Button>
                         </Link>
                         <Link to="/service-requests">
-                          <Button variant="ghost" size="sm" className="text-xs">Request</Button>
+                          <Button variant="ghost" size="sm" className="text-xs">
+                            Request
+                          </Button>
                         </Link>
                         <Link to="/compliance">
-                          <Button variant="ghost" size="sm" className="text-xs">Compliance</Button>
+                          <Button variant="ghost" size="sm" className="text-xs">
+                            Compliance
+                          </Button>
                         </Link>
                       </div>
                     </TableCell>
@@ -167,5 +189,5 @@ export default function BuildingsPage() {
         Showing {buildings.length} of {allBuildings.length} buildings
       </div>
     </div>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import {
   Building2,
   ClipboardList,
@@ -8,7 +8,7 @@ import {
   Mail,
   DollarSign,
   Info,
-} from 'lucide-react'
+} from 'lucide-react';
 import {
   APP_NAME,
   APP_TAGLINE,
@@ -16,12 +16,12 @@ import {
   CONTACT_EMAIL,
   CONTACT_PHONE,
   FEES,
-} from '@/lib/constants'
-import { useAuth } from '@/hooks/useAuth'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+} from '@/lib/constants';
+import { useAuth } from '@/hooks/useAuth';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export default function Landing() {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated } = useAuth();
 
   return (
     <div>
@@ -39,8 +39,8 @@ export default function Landing() {
               {APP_NAME}
             </h1>
             <p className="mt-4 text-lg text-white/80 max-w-2xl">
-              {APP_TAGLINE} — ensuring residential apartment buildings meet
-              property standards for the health, safety, and well-being of tenants.
+              {APP_TAGLINE} — ensuring residential apartment buildings meet property standards for
+              the health, safety, and well-being of tenants.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               {!isAuthenticated && (
@@ -63,7 +63,6 @@ export default function Landing() {
       </section>
 
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-
         {/* Alert */}
         <Alert variant="info" className="mb-8">
           <Info className="h-4 w-4" aria-hidden="true" />
@@ -82,8 +81,7 @@ export default function Landing() {
           </p>
           <ul className="space-y-2 text-gray-700">
             <li className="flex items-center gap-2">
-              <span className="text-green-600 font-bold">✓</span>
-              3 or more storeys
+              <span className="text-green-600 font-bold">✓</span>3 or more storeys
             </li>
             <li className="flex items-center gap-2">
               <span className="text-green-600 font-bold">✓</span>
@@ -100,21 +98,24 @@ export default function Landing() {
               <ClipboardList className="h-8 w-8 text-brand mb-3" aria-hidden="true" />
               <h3 className="font-semibold text-gray-900 mb-1">Register</h3>
               <p className="text-sm text-gray-600">
-                Submit your building registration and receive your Owner ID and PIN within 5–7 business days.
+                Submit your building registration and receive your Owner ID and PIN within 5–7
+                business days.
               </p>
             </div>
             <div className="rounded-lg border p-6">
               <RefreshCw className="h-8 w-8 text-brand mb-3" aria-hidden="true" />
               <h3 className="font-semibold text-gray-900 mb-1">Renew Annually</h3>
               <p className="text-sm text-gray-600">
-                Log in each year before July 31 to renew your registration and pay the annual fee online.
+                Log in each year before July 31 to renew your registration and pay the annual fee
+                online.
               </p>
             </div>
             <div className="rounded-lg border p-6">
               <ShieldCheck className="h-8 w-8 text-brand mb-3" aria-hidden="true" />
               <h3 className="font-semibold text-gray-900 mb-1">Stay Compliant</h3>
               <p className="text-sm text-gray-600">
-                Track evaluations, respond to service requests, and maintain your building's compliance score.
+                Track evaluations, respond to service requests, and maintain your building's
+                compliance score.
               </p>
             </div>
           </div>
@@ -163,12 +164,15 @@ export default function Landing() {
             </div>
             <p className="text-sm text-gray-700">
               The annual registration fee is{' '}
-              <strong>${FEES.annualPerUnit.toFixed(2)} per residential unit</strong>.
-              For example, a 40-unit building pays{' '}
-              <strong>${(40 * FEES.annualPerUnit).toFixed(2)}</strong> per year.
+              <strong>${FEES.annualPerUnit.toFixed(2)} per residential unit</strong>. For example, a
+              40-unit building pays <strong>${(40 * FEES.annualPerUnit).toFixed(2)}</strong> per
+              year.
             </p>
             <div className="mt-4">
-              <Link to="/fees" className="text-sm text-brand underline underline-offset-2 hover:text-brand/80">
+              <Link
+                to="/fees"
+                className="text-sm text-brand underline underline-offset-2 hover:text-brand/80"
+              >
                 View full fee schedule and fines →
               </Link>
             </div>
@@ -201,8 +205,7 @@ export default function Landing() {
             </a>
           </div>
         </section>
-
       </div>
     </div>
-  )
+  );
 }

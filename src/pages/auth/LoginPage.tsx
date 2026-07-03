@@ -1,26 +1,20 @@
-import { useState } from "react";
-import { Navigate, useNavigate, useLocation, Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Building2, Eye, EyeOff, Loader2, Info } from "lucide-react";
-import { useAuth } from "@/hooks/useAuth";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { CONTACT_EMAIL, CONTACT_PHONE } from "@/lib/constants";
+import { useState } from 'react';
+import { Navigate, useNavigate, useLocation, Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { Building2, Eye, EyeOff, Loader2, Info } from 'lucide-react';
+import { useAuth } from '@/hooks/useAuth';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CITY_NAME, CONTACT_EMAIL, CONTACT_PHONE } from '@/lib/constants';
 
 const loginSchema = z.object({
-  loginId: z.string().min(1, "Login ID is required"),
-  pin: z.string().min(1, "PIN is required"),
+  loginId: z.string().min(1, 'Login ID is required').regex(/^\d+$/, 'Login ID must be numeric'),
+  pin: z.string().min(1, 'PIN is required').regex(/^\d+$/, 'PIN must be numeric'),
 });
 
 type LoginFormValues = z.infer<typeof loginSchema>;
@@ -34,7 +28,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state as LocationState | null;
-  const from = state?.from?.pathname ?? "/dashboard";
+  const from = state?.from?.pathname ?? '/dashboard';
   const [showPin, setShowPin] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
 
@@ -56,7 +50,7 @@ export default function LoginPage() {
     if (success) {
       navigate(from, { replace: true });
     } else {
-      setAuthError("Invalid Login ID or PIN");
+      setAuthError('Invalid Login ID or PIN');
     }
   }
 
@@ -67,8 +61,8 @@ export default function LoginPage() {
           <Info className="h-4 w-4" aria-hidden="true" />
           <AlertTitle>Demo Credentials</AlertTitle>
           <AlertDescription>
-            Use <strong>Login ID: 12345</strong> and <strong>PIN: 6789</strong>{" "}
-            to explore the portal.
+            Use <strong>Login ID: 12345</strong> and <strong>PIN: 6789</strong> to explore the
+            portal.
           </AlertDescription>
         </Alert>
 
@@ -83,11 +77,7 @@ export default function LoginPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              noValidate
-              className="space-y-4"
-            >
+            <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
               {authError && (
                 <Alert variant="destructive" aria-live="assertive">
                   <AlertDescription>{authError}</AlertDescription>
@@ -102,18 +92,15 @@ export default function LoginPage() {
                   inputMode="numeric"
                   autoComplete="username"
                   placeholder="Enter your Login ID"
-                  aria-describedby={
-                    errors.loginId ? "loginId-error" : undefined
-                  }
+                  aria-describedby={errors.loginId ? 'loginId-error' : 'loginId-hint'}
                   aria-invalid={!!errors.loginId}
-                  {...register("loginId")}
+                  {...register('loginId')}
                 />
+                <p id="loginId-hint" className="text-xs text-gray-500">
+                  Use the Login ID provided by the City of {CITY_NAME}
+                </p>
                 {errors.loginId && (
-                  <p
-                    id="loginId-error"
-                    className="text-xs text-red-600"
-                    role="alert"
-                  >
+                  <p id="loginId-error" className="text-xs text-red-600" role="alert">
                     {errors.loginId.message}
                   </p>
                 )}
@@ -124,20 +111,20 @@ export default function LoginPage() {
                 <div className="relative">
                   <Input
                     id="pin"
-                    type={showPin ? "text" : "password"}
+                    type={showPin ? 'text' : 'password'}
                     inputMode="numeric"
                     autoComplete="current-password"
                     placeholder="Enter your PIN"
                     className="pr-10"
-                    aria-describedby={errors.pin ? "pin-error" : undefined}
+                    aria-describedby={errors.pin ? 'pin-error' : 'pin-hint'}
                     aria-invalid={!!errors.pin}
-                    {...register("pin")}
+                    {...register('pin')}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPin((prev) => !prev)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
-                    aria-label={showPin ? "Hide PIN" : "Show PIN"}
+                    aria-label={showPin ? 'Hide PIN' : 'Show PIN'}
                   >
                     {showPin ? (
                       <EyeOff className="h-4 w-4" aria-hidden="true" />
@@ -146,6 +133,9 @@ export default function LoginPage() {
                     )}
                   </button>
                 </div>
+                <p id="pin-hint" className="text-xs text-gray-500">
+                  Use the PIN provided by the City of {CITY_NAME}
+                </p>
                 {errors.pin && (
                   <p id="pin-error" className="text-xs text-red-600" role="alert">
                     {errors.pin.message}
@@ -165,18 +155,16 @@ export default function LoginPage() {
                     Signing in…
                   </>
                 ) : (
-                  "Log In"
+                  'Log In'
                 )}
               </Button>
             </form>
 
             <div className="mt-6 border-t pt-4">
-              <p className="text-xs text-gray-500 text-center mb-2">
-                Forgot your credentials?
-              </p>
+              <p className="text-xs text-gray-500 text-center mb-2">Forgot your credentials?</p>
               <div className="text-xs text-gray-600 space-y-1 text-center">
                 <p>
-                  Email:{" "}
+                  Email:{' '}
                   <a
                     href={`mailto:${CONTACT_EMAIL}`}
                     className="text-brand underline underline-offset-2"
@@ -185,7 +173,7 @@ export default function LoginPage() {
                   </a>
                 </p>
                 <p>
-                  Phone:{" "}
+                  Phone:{' '}
                   <a href={`tel:${CONTACT_PHONE}`} className="text-brand">
                     {CONTACT_PHONE}
                   </a>
@@ -196,7 +184,7 @@ export default function LoginPage() {
         </Card>
 
         <p className="text-center text-sm text-gray-500">
-          Don't have an account?{" "}
+          Don't have an account?{' '}
           <Link
             to="/register"
             className="text-brand underline underline-offset-2 hover:text-brand/90"

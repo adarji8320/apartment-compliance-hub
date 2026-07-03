@@ -1,11 +1,9 @@
-import { createContext, useState, type ReactNode } from "react";
-import { AUTH_STORAGE_KEY, HARDCODED_CREDENTIALS } from "@/lib/constants";
-import type { AuthUser, AuthContextValue } from "@/types";
+import { createContext, useState, type ReactNode } from 'react';
+import { AUTH_STORAGE_KEY, HARDCODED_CREDENTIALS } from '@/lib/constants';
+import type { AuthUser, AuthContextValue } from '@/types';
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const AuthContext = createContext<AuthContextValue | undefined>(
-  undefined,
-);
+export const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 function getStoredUser(): AuthUser | null {
   const stored = sessionStorage.getItem(AUTH_STORAGE_KEY);
@@ -17,10 +15,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const isAuthenticated = user !== null;
 
   function login(loginId: string, pin: string) {
-    if (
-      loginId === HARDCODED_CREDENTIALS.loginId &&
-      pin === HARDCODED_CREDENTIALS.pin
-    ) {
+    if (loginId === HARDCODED_CREDENTIALS.loginId && pin === HARDCODED_CREDENTIALS.pin) {
       const authUser: AuthUser = {
         loginId,
         ownerName: HARDCODED_CREDENTIALS.ownerName,
