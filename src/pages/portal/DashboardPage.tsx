@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import {
   Building2,
   RefreshCw,
@@ -8,12 +8,12 @@ import {
   Bell,
   CreditCard,
   ClipboardCheck,
-} from 'lucide-react'
-import { useAuth } from '@/hooks/useAuth'
-import { useBuildings } from '@/hooks/useBuildings'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+} from 'lucide-react';
+import { useAuth } from '@/hooks/useAuth';
+import { useBuildings } from '@/hooks/useBuildings';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import {
   Table,
   TableBody,
@@ -21,21 +21,26 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
-import { ColourRatingBadge } from '@/components/badges/ColourRatingBadge'
-import { StatusBadge } from '@/components/badges/StatusBadge'
-import { MOCK_SERVICE_REQUESTS } from '@/data/mockServiceRequests'
-import { formatCurrency, formatDate } from '@/lib/utils'
+} from '@/components/ui/table';
+import { ColourRatingBadge } from '@/components/badges/ColourRatingBadge';
+import { StatusBadge } from '@/components/badges/StatusBadge';
+import { MOCK_SERVICE_REQUESTS } from '@/data/mockServiceRequests';
+import { formatCurrency, formatDate } from '@/lib/utils';
 
 export default function DashboardPage() {
-  const { user } = useAuth()
-  const { allBuildings, stats } = useBuildings()
-  const { totalBuildings, renewalDue: renewalDueCount, avgScore: averageScore } = stats
+  const { user } = useAuth();
+  const { allBuildings, stats } = useBuildings();
+  const {
+    totalBuildings,
+    renewalDue: renewalDueCount,
+    avgScore: averageScore,
+    nextRenewalDate,
+  } = stats;
 
-  const openServiceRequests = MOCK_SERVICE_REQUESTS.filter((r) => r.status !== 'resolved')
+  const openServiceRequests = MOCK_SERVICE_REQUESTS.filter((r) => r.status !== 'resolved');
   const urgentOpen = MOCK_SERVICE_REQUESTS.filter(
-    (r) => r.urgency === 'urgent' && r.status !== 'resolved'
-  )
+    (r) => r.urgency === 'urgent' && r.status !== 'resolved',
+  );
 
   return (
     <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-6">
@@ -47,10 +52,10 @@ export default function DashboardPage() {
 
       {/* Alert banners */}
       <div className="space-y-3">
-        {renewalDueCount > 0 && (
+        {renewalDueCount > 0 && nextRenewalDate && (
           <Alert variant="warning">
             <AlertTriangle className="h-4 w-4" aria-hidden="true" />
-            <AlertTitle>Renewal Deadline — July 31, 2026</AlertTitle>
+            <AlertTitle>Renewal Deadline — {formatDate(nextRenewalDate)}</AlertTitle>
             <AlertDescription>
               {renewalDueCount} building{renewalDueCount !== 1 ? 's are' : ' is'} due for renewal.{' '}
               <Link to="/renewal" className="underline font-medium">
@@ -76,7 +81,8 @@ export default function DashboardPage() {
           <Alert variant="destructive">
             <AlertTriangle className="h-4 w-4" aria-hidden="true" />
             <AlertTitle>
-              {urgentOpen.length} Urgent Service Request{urgentOpen.length !== 1 ? 's' : ''} Outstanding
+              {urgentOpen.length} Urgent Service Request{urgentOpen.length !== 1 ? 's' : ''}{' '}
+              Outstanding
             </AlertTitle>
             <AlertDescription>
               Urgent requests must be resolved within 24 hours to avoid fines.{' '}
@@ -108,7 +114,9 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <p className="text-3xl font-bold text-orange-600">{renewalDueCount}</p>
-            <p className="text-xs text-gray-500 mt-1">By July 31, 2026</p>
+            <p className="text-xs text-gray-500 mt-1">
+              {nextRenewalDate ? `By ${formatDate(nextRenewalDate)}` : 'No upcoming renewals'}
+            </p>
           </CardContent>
         </Card>
 
@@ -125,7 +133,9 @@ export default function DashboardPage() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600">Avg. Compliance Score</CardTitle>
+            <CardTitle className="text-sm font-medium text-gray-600">
+              Avg. Compliance Score
+            </CardTitle>
             <Star className="h-4 w-4 text-yellow-500" aria-hidden="true" />
           </CardHeader>
           <CardContent>
@@ -174,12 +184,16 @@ export default function DashboardPage() {
               <TableHeader>
                 <TableRow className="bg-gray-50">
                   <TableHead scope="col">Address</TableHead>
-                  <TableHead scope="col" className="text-center">Units</TableHead>
+                  <TableHead scope="col" className="text-center">
+                    Units
+                  </TableHead>
                   <TableHead scope="col">Colour Rating</TableHead>
                   <TableHead scope="col">Status</TableHead>
                   <TableHead scope="col">Renewal Date</TableHead>
                   <TableHead scope="col">Annual Fee</TableHead>
-                  <TableHead scope="col" className="text-right">Actions</TableHead>
+                  <TableHead scope="col" className="text-right">
+                    Actions
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -188,22 +202,28 @@ export default function DashboardPage() {
                     <TableCell className="font-medium">{building.address}</TableCell>
                     <TableCell className="text-center">{building.units}</TableCell>
                     <TableCell>
-                      <ColourRatingBadge rating={building.colourRating} />
+                      <ColourRatingBadge rating={building.colourRating} showLabel={false} />
                     </TableCell>
                     <TableCell>
                       <StatusBadge status={building.status} />
                     </TableCell>
-                    <TableCell className="text-sm text-gray-600">{formatDate(building.renewalDate)}</TableCell>
+                    <TableCell className="text-sm text-gray-600">
+                      {formatDate(building.renewalDate)}
+                    </TableCell>
                     <TableCell className="tabular-nums text-sm">
                       {formatCurrency(building.annualFee)}
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
                         <Link to="/evaluation">
-                          <Button variant="ghost" size="sm">Eval</Button>
+                          <Button variant="ghost" size="sm">
+                            Eval
+                          </Button>
                         </Link>
                         <Link to="/service-requests">
-                          <Button variant="ghost" size="sm">Request</Button>
+                          <Button variant="ghost" size="sm">
+                            Request
+                          </Button>
                         </Link>
                       </div>
                     </TableCell>
@@ -215,5 +235,5 @@ export default function DashboardPage() {
         </Card>
       </div>
     </div>
-  )
+  );
 }
