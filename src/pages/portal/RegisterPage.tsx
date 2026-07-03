@@ -87,8 +87,9 @@ function StepIndicator({
       <ol className="flex items-center gap-0">
         {STEPS.map((label, i) => {
           const stepNum = i + 1;
-          const isDone = stepNum < currentStep;
           const isActive = stepNum === currentStep;
+          const isLastStep = stepNum === STEPS.length;
+          const isDone = stepNum < currentStep || (isActive && isLastStep);
           const isClickable = isDone && canNavigateBack;
 
           const circleAndLabel = (
