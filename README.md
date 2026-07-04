@@ -37,7 +37,9 @@ A React + TypeScript application for managing apartment building compliance regi
 - **Dashboard** (owner portal) — welcome banner, renewal/compliance/service-request alerts, summary cards, quick actions, buildings overview table with colour rating and status badges
 - **My Buildings** — searchable, filterable (by status and colour rating) table of registered buildings with an empty state
 - **Register a Building** — 4-step wizard (property details, owner details, review, confirmation) with per-step validation, clickable step navigation to revisit completed steps, phone number auto-formatting, and a generated reference number
+- **Renewal** — building selector scoped to buildings with "Renewal Due" status, live invoice (unit count, per-unit fee, automatic late-payment fine once past due, total owing), Zod-validated payment form (card number/expiry auto-formatting, Visa/MasterCard/Amex only), and a payment confirmation screen
 - **Auth state everywhere** — Header, Footer, and Landing all reflect signed-in/out state (Login ⇄ Logout, "Register Your Building" hidden once signed in, hero CTA becomes "Go to Dashboard"); Footer is hidden on authenticated portal pages
+- **Error boundary** — app-wide boundary catches render errors and shows a fallback UI instead of a blank screen
 - **Accessibility** — WCAG 2.x AA-targeted: verified colour contrast, skip-to-content link, focus management on route change, `aria-hidden` on decorative icons, labelled landmarks, accessible form errors
 
 ## Getting Started
@@ -79,11 +81,12 @@ src/
 │   ├── ui/               # shadcn/ui components (Button, Card, Input, Label, Alert, Badge, Table, Select, Checkbox, Separator)
 │   ├── layout/           # Header, Footer, ProtectedRoute
 │   ├── badges/           # ColourRatingBadge, StatusBadge
+│   ├── ErrorBoundary.tsx # App-wide render-error fallback
 │   └── ScrollToTop.tsx   # Scroll + focus reset on route change
 ├── pages/
 │   ├── public/           # Landing, Fees
 │   ├── auth/             # Login
-│   └── portal/           # Dashboard, My Buildings, Register (all protected)
+│   └── portal/           # Dashboard, My Buildings, Register, Renewal (all protected)
 ├── context/
 │   └── AuthContext.tsx   # Auth state + session persistence
 ├── hooks/
@@ -92,7 +95,7 @@ src/
 ├── types/
 │   └── index.ts          # Shared TypeScript interfaces
 ├── lib/
-│   ├── utils.ts          # cn(), calculateAnnualFee(), formatCurrency(), formatDate(), formatPhoneNumber(), generateReferenceNumber()
+│   ├── utils.ts          # cn(), calculateAnnualFee(), formatCurrency(), formatDate(), formatPhoneNumber(), generateReferenceNumber(), formatCardNumber(), formatExpiryDate(), addYears(), isPastDue()
 │   └── constants.ts      # App copy, fees, fines, demo credentials, wards
 ├── data/
 │   ├── mockBuildings.ts  # Mock building records
@@ -105,7 +108,6 @@ src/
 
 The following are planned but not yet built, filling out the rest of the authenticated owner portal:
 
-- **Renewal** — building selector, invoice, payment form
 - **Service Requests** — submission with urgency detection and history
 - **Compliance Checklist** — interactive checklist with progress tracking
 - **Building Evaluation** — score breakdown, colour rating history
