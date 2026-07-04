@@ -24,6 +24,7 @@ export interface AuthContextValue {
 }
 
 export type BuildingType = 'rental-apartment' | 'mixed-use' | 'other';
+export type CardType = 'visa' | 'mastercard' | 'amex';
 export type ColourRating = 'green' | 'yellow' | 'red';
 export type RegistrationStatus = 'Active' | 'Renewal Due' | 'Pending' | 'Expired';
 export type ServiceRequestUrgency = 'urgent' | 'non-urgent';

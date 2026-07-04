@@ -39,3 +39,29 @@ export function formatPhoneNumber(value: string): string {
   if (digits.length <= 6) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
   return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
 }
+
+export function formatCardNumber(value: string): string {
+  const digits = value.replace(/\D/g, '').slice(0, 16);
+  return digits.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+}
+
+export function formatExpiryDate(value: string): string {
+  const digits = value.replace(/\D/g, '').slice(0, 4);
+  if (digits.length >= 3) {
+    return `${digits.slice(0, 2)}/${digits.slice(2)}`;
+  }
+  return digits;
+}
+
+export function addYears(dateStr: string, years: number): string {
+  const [year, month, day] = dateStr.split('-').map(Number);
+  return `${year + years}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+}
+
+export function isPastDue(dateStr: string): boolean {
+  const [year, month, day] = dateStr.split('-').map(Number);
+  const dueDate = new Date(year, month - 1, day);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return today > dueDate;
+}
