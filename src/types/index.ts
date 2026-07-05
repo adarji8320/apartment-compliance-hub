@@ -49,3 +49,26 @@ export interface ServiceRequest {
   urgency: ServiceRequestUrgency;
   status: ServiceRequestStatus;
 }
+
+export interface EvaluationCategory {
+  name: string;
+  score: number;
+  maxScore: number;
+}
+
+export interface Evaluation {
+  id: string;
+  buildingId: string;
+  date: string;
+  totalScore: number;
+  maxScore: number;
+  categories: EvaluationCategory[];
+  colourRating: ColourRating;
+  evaluatorName: string;
+  nextEvaluationDate: string;
+}
+
+export interface ScoreHistoryEntry {
+  date: string;
+  score: number;
+}

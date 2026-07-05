@@ -12,6 +12,7 @@ import DashboardPage from '@/pages/portal/DashboardPage';
 import BuildingsPage from '@/pages/portal/BuildingsPage';
 import RegisterPage from '@/pages/portal/RegisterPage';
 import RenewalPage from '@/pages/portal/RenewalPage';
+import EvaluationPage from '@/pages/portal/EvaluationPage';
 
 const PUBLIC_PATHS = ['/', '/fees', '/login'];
 
@@ -62,6 +63,14 @@ function AppLayout() {
             element={
               <ProtectedRoute>
                 <RenewalPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/evaluation"
+            element={
+              <ProtectedRoute>
+                <EvaluationPage />
               </ProtectedRoute>
             }
           />
