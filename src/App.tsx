@@ -4,6 +4,7 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
+import DocumentTitle from '@/components/DocumentTitle';
 import { ProtectedRoute } from '@/components/layout/ProtectedRoute';
 import Landing from '@/pages/public/Landing';
 import Fees from '@/pages/public/Fees';
@@ -23,12 +24,6 @@ function AppLayout() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-brand focus:shadow-md"
-      >
-        Skip to main content
-      </a>
       <Header />
       <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
         <Routes>
@@ -96,6 +91,7 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <ScrollToTop />
+          <DocumentTitle />
           <AppLayout />
         </BrowserRouter>
       </AuthProvider>

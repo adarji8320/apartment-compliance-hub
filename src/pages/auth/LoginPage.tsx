@@ -71,7 +71,9 @@ export default function LoginPage() {
             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand">
               <Building2 className="h-6 w-6 text-white" aria-hidden="true" />
             </div>
-            <CardTitle className="text-xl">Building Owner Login</CardTitle>
+            <CardTitle as="h1" className="text-xl">
+              Building Owner Login
+            </CardTitle>
             <CardDescription>
               Enter your Login ID and PIN to access the owner portal
             </CardDescription>
