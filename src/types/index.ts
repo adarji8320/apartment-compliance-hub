@@ -72,3 +72,13 @@ export interface ScoreHistoryEntry {
   date: string;
   score: number;
 }
+
+export interface ComplianceItem {
+  id: string;
+  label: string;
+  description: string;
+  isNew?: boolean;
+  completed: boolean;
+  notes: string;
+  templateUrl?: string;
+}

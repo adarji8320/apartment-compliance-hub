@@ -13,6 +13,7 @@ import BuildingsPage from '@/pages/portal/BuildingsPage';
 import RegisterPage from '@/pages/portal/RegisterPage';
 import RenewalPage from '@/pages/portal/RenewalPage';
 import EvaluationPage from '@/pages/portal/EvaluationPage';
+import CompliancePage from '@/pages/portal/CompliancePage';
 
 const PUBLIC_PATHS = ['/', '/fees', '/login'];
 
@@ -71,6 +72,14 @@ function AppLayout() {
             element={
               <ProtectedRoute>
                 <EvaluationPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/compliance"
+            element={
+              <ProtectedRoute>
+                <CompliancePage />
               </ProtectedRoute>
             }
           />

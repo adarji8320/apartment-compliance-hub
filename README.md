@@ -39,6 +39,7 @@ A React + TypeScript application for managing apartment building compliance regi
 - **Register a Building** — 4-step wizard (property details, owner details, review, confirmation) with per-step validation, clickable step navigation to revisit completed steps, phone number auto-formatting, and a generated reference number
 - **Renewal** — building selector scoped to buildings with "Renewal Due" status, live invoice (unit count, per-unit fee, automatic late-payment fine once past due, total owing), Zod-validated payment form (card number/expiry auto-formatting, Visa/MasterCard/Amex only), and a payment confirmation screen
 - **Building Evaluation** — building selector, score breakdown by category with colour-coded progress bars, colour rating legend, evaluation history, and next scheduled evaluation date
+- **Compliance Checklist** — building selector, live progress bar and completion count, toggleable checklist items with per-item notes and template download links, and a completion alert
 - **Auth state everywhere** — Header, Footer, and Landing all reflect signed-in/out state (Login ⇄ Logout, "Register Your Building" hidden once signed in, hero CTA becomes "Go to Dashboard"); Footer is hidden on authenticated portal pages
 - **Error boundary** — app-wide boundary catches render errors and shows a fallback UI instead of a blank screen
 - **Accessibility** — WCAG 2.x AA-targeted: verified colour contrast, skip-to-content link, focus management on route change, `aria-hidden` on decorative icons, labelled landmarks, accessible form errors
@@ -79,7 +80,7 @@ Hosted on [Vercel](https://vercel.com), connected to this repository's `main` br
 ```
 src/
 ├── components/
-│   ├── ui/               # shadcn/ui components (Button, Card, Input, Label, Alert, Badge, Table, Select, Checkbox, Separator, Progress)
+│   ├── ui/               # shadcn/ui components (Button, Card, Input, Label, Alert, Badge, Table, Select, Checkbox, Separator, Progress, Textarea)
 │   ├── layout/           # Header, Footer, ProtectedRoute
 │   ├── badges/           # ColourRatingBadge, StatusBadge
 │   ├── ErrorBoundary.tsx # App-wide render-error fallback
@@ -87,7 +88,7 @@ src/
 ├── pages/
 │   ├── public/           # Landing, Fees
 │   ├── auth/             # Login
-│   └── portal/           # Dashboard, My Buildings, Register, Renewal, Evaluation (all protected)
+│   └── portal/           # Dashboard, My Buildings, Register, Renewal, Evaluation, Compliance (all protected)
 ├── context/
 │   └── AuthContext.tsx   # Auth state + session persistence
 ├── hooks/
@@ -110,7 +111,6 @@ src/
 The following are planned but not yet built, filling out the rest of the authenticated owner portal:
 
 - **Service Requests** — submission with urgency detection and history
-- **Compliance Checklist** — interactive checklist with progress tracking
 
 ## License
 
