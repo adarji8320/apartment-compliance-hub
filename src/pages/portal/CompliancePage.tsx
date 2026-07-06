@@ -103,11 +103,11 @@ function ComplianceChecklist({ buildingId }: { buildingId: string }) {
 
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
-                    <span className="text-xs text-gray-400 font-mono">{idx + 1}.</span>
+                    <span className="text-xs text-gray-600 font-mono">{idx + 1}.</span>
                     <h3
                       className={cn(
                         'font-medium text-sm',
-                        item.completed ? 'line-through text-gray-400' : 'text-gray-900',
+                        item.completed ? 'line-through text-gray-600' : 'text-gray-900',
                       )}
                     >
                       {item.label}
@@ -118,11 +118,11 @@ function ComplianceChecklist({ buildingId }: { buildingId: string }) {
                       </Badge>
                     )}
                     {item.completed ? (
-                      <span className="flex items-center gap-1 text-xs text-green-600">
+                      <span className="flex items-center gap-1 text-xs text-green-700">
                         <CheckCircle2 className="h-3 w-3" aria-hidden="true" /> Complete
                       </span>
                     ) : (
-                      <span className="flex items-center gap-1 text-xs text-red-500">
+                      <span className="flex items-center gap-1 text-xs text-red-700">
                         <XCircle className="h-3 w-3" aria-hidden="true" /> Incomplete
                       </span>
                     )}
