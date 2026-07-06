@@ -81,10 +81,10 @@ export default function Landing() {
           </p>
           <ul className="space-y-2 text-gray-700">
             <li className="flex items-center gap-2">
-              <span className="text-green-600 font-bold">✓</span>3 or more storeys
+              <span className="text-green-700 font-bold">✓</span>3 or more storeys
             </li>
             <li className="flex items-center gap-2">
-              <span className="text-green-600 font-bold">✓</span>
+              <span className="text-green-700 font-bold">✓</span>
               10 or more residential units
             </li>
           </ul>
@@ -145,7 +145,7 @@ export default function Landing() {
               <p className="mt-1 text-xs text-yellow-700">Score: 50–74</p>
             </div>
             <div className="rounded-lg border-2 border-red-300 bg-red-50 p-5 text-center">
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-red-500">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-red-700">
                 <span className="text-xl font-bold text-white">R</span>
               </div>
               <h3 className="font-semibold text-red-800">Red</h3>

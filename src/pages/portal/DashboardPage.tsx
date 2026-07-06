@@ -149,24 +149,24 @@ export default function DashboardPage() {
       <div>
         <h2 className="mb-3 text-base font-semibold text-gray-700">Quick Actions</h2>
         <div className="flex flex-wrap gap-3">
-          <Link to="/renewal">
-            <Button className="gap-2 bg-brand hover:bg-brand/90">
+          <Button asChild className="gap-2 bg-brand hover:bg-brand/90">
+            <Link to="/renewal">
               <CreditCard className="h-4 w-4" aria-hidden="true" />
               Pay Invoice
-            </Button>
-          </Link>
-          <Link to="/service-requests">
-            <Button variant="outline" className="gap-2 border-brand text-brand">
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="gap-2 border-brand text-brand">
+            <Link to="/service-requests">
               <Wrench className="h-4 w-4" aria-hidden="true" />
               Submit Service Request
-            </Button>
-          </Link>
-          <Link to="/compliance">
-            <Button variant="outline" className="gap-2">
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="gap-2">
+            <Link to="/compliance">
               <ClipboardCheck className="h-4 w-4" aria-hidden="true" />
               View Compliance Checklist
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
       </div>
 
@@ -215,16 +215,12 @@ export default function DashboardPage() {
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
-                        <Link to="/evaluation">
-                          <Button variant="ghost" size="sm">
-                            Eval
-                          </Button>
-                        </Link>
-                        <Link to="/service-requests">
-                          <Button variant="ghost" size="sm">
-                            Request
-                          </Button>
-                        </Link>
+                        <Button asChild variant="ghost" size="sm">
+                          <Link to="/evaluation">Eval</Link>
+                        </Button>
+                        <Button asChild variant="ghost" size="sm">
+                          <Link to="/service-requests">Request</Link>
+                        </Button>
                       </div>
                     </TableCell>
                   </TableRow>

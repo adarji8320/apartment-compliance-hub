@@ -160,21 +160,15 @@ export default function BuildingsPage() {
                     </TableCell>
                     <TableCell>
                       <div className="flex justify-end gap-1">
-                        <Link to="/evaluation">
-                          <Button variant="ghost" size="sm" className="text-xs">
-                            Eval
-                          </Button>
-                        </Link>
-                        <Link to="/service-requests">
-                          <Button variant="ghost" size="sm" className="text-xs">
-                            Request
-                          </Button>
-                        </Link>
-                        <Link to="/compliance">
-                          <Button variant="ghost" size="sm" className="text-xs">
-                            Compliance
-                          </Button>
-                        </Link>
+                        <Button asChild variant="ghost" size="sm" className="text-xs">
+                          <Link to="/evaluation">Eval</Link>
+                        </Button>
+                        <Button asChild variant="ghost" size="sm" className="text-xs">
+                          <Link to="/service-requests">Request</Link>
+                        </Button>
+                        <Button asChild variant="ghost" size="sm" className="text-xs">
+                          <Link to="/compliance">Compliance</Link>
+                        </Button>
                       </div>
                     </TableCell>
                   </TableRow>

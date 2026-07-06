@@ -92,7 +92,7 @@ export default function RenewalPage() {
         <Card>
           <CardContent className="py-10 text-center space-y-4">
             <CheckCircle2 className="mx-auto h-14 w-14 text-green-600" aria-hidden="true" />
-            <h2 className="text-xl font-bold text-gray-900">Payment Received!</h2>
+            <h1 className="text-xl font-bold text-gray-900">Payment Received!</h1>
             <p className="text-sm text-gray-600">
               Registration for <strong>{selectedBuilding.address}</strong> has been renewed.
             </p>

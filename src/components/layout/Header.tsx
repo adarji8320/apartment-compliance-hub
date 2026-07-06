@@ -6,7 +6,10 @@ import { APP_NAME } from '@/lib/constants';
 import { useAuth } from '@/hooks/useAuth';
 
 const navButtonClass =
-  'inline-flex items-center gap-2 px-4 py-2 border border-white text-white text-sm font-semibold rounded-md hover:bg-white/10 transition-colors';
+  'inline-flex items-center gap-2 px-4 py-2 border border-white text-white text-sm font-semibold rounded-md hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white';
+
+const navLinkClass =
+  'rounded hover:text-brand-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white';
 
 const publicNavLinks = [
   { label: 'Home', to: '/' },
@@ -42,7 +45,10 @@ export default function Header() {
     <header className="bg-brand sticky top-0 z-50 w-full border-b text-white shadow-md">
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="text-lg font-bold tracking-tight hover:opacity-90">
+          <Link
+            to="/"
+            className={cn('text-lg font-bold tracking-tight hover:opacity-90', navLinkClass)}
+          >
             {APP_NAME}
           </Link>
 
@@ -51,11 +57,7 @@ export default function Header() {
             className="hidden lg:flex items-center gap-4 text-sm font-medium"
           >
             {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className="hover:text-brand-secondary transition-colors"
-              >
+              <Link key={link.to} to={link.to} className={navLinkClass}>
                 {link.label}
               </Link>
             ))}
@@ -108,7 +110,7 @@ export default function Header() {
             <Link
               key={link.to}
               to={link.to}
-              className="hover:text-brand-secondary transition-colors"
+              className={navLinkClass}
               onClick={() => setOpen(false)}
             >
               {link.label}
