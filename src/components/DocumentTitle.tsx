@@ -19,8 +19,8 @@ export default function DocumentTitle() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const pageTitle = PAGE_TITLES[pathname];
-    document.title = pageTitle ? `${pageTitle} | ${APP_NAME}` : APP_NAME;
+    const pageTitle = PAGE_TITLES[pathname] ?? 'Page Not Found';
+    document.title = `${pageTitle} | ${APP_NAME}`;
   }, [pathname]);
 
   return null;

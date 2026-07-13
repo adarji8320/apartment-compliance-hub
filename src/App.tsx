@@ -8,6 +8,7 @@ import DocumentTitle from '@/components/DocumentTitle';
 import { ProtectedRoute } from '@/components/layout/ProtectedRoute';
 import Landing from '@/pages/public/Landing';
 import Fees from '@/pages/public/Fees';
+import NotFound from '@/pages/public/NotFound';
 import LoginPage from '@/pages/auth/LoginPage';
 import DashboardPage from '@/pages/portal/DashboardPage';
 import BuildingsPage from '@/pages/portal/BuildingsPage';
@@ -78,6 +79,7 @@ function AppLayout() {
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       {showFooter && <Footer />}
