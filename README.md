@@ -42,6 +42,7 @@ A React + TypeScript application for managing apartment building compliance regi
 - **Compliance Checklist** — building selector, live progress bar and completion count, toggleable checklist items with per-item notes and template download links, and a completion alert
 - **Auth state everywhere** — Header, Footer, and Landing all reflect signed-in/out state (Login ⇄ Logout, "Register Your Building" hidden once signed in, hero CTA becomes "Go to Dashboard"); Footer is hidden on authenticated portal pages
 - **Error boundary** — app-wide boundary catches render errors and shows a fallback UI instead of a blank screen
+- **404 page** — catch-all route for unmatched paths with a link back home
 - **Accessibility** — WCAG 2.x AA-targeted: verified colour contrast, skip-to-content link, focus management on route change, `aria-hidden` on decorative icons, labelled landmarks, accessible form errors
 
 ## Getting Started
@@ -84,9 +85,10 @@ src/
 │   ├── layout/           # Header, Footer, ProtectedRoute
 │   ├── badges/           # ColourRatingBadge, StatusBadge
 │   ├── ErrorBoundary.tsx # App-wide render-error fallback
-│   └── ScrollToTop.tsx   # Scroll + focus reset on route change
+│   ├── ScrollToTop.tsx   # Scroll + focus reset on route change (skips the initial mount)
+│   └── DocumentTitle.tsx # Per-route document.title
 ├── pages/
-│   ├── public/           # Landing, Fees
+│   ├── public/           # Landing, Fees, NotFound
 │   ├── auth/             # Login
 │   └── portal/           # Dashboard, My Buildings, Register, Renewal, Evaluation, Compliance (all protected)
 ├── context/
