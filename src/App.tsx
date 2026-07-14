@@ -14,6 +14,7 @@ import DashboardPage from '@/pages/portal/DashboardPage';
 import BuildingsPage from '@/pages/portal/BuildingsPage';
 import RegisterPage from '@/pages/portal/RegisterPage';
 import RenewalPage from '@/pages/portal/RenewalPage';
+import ServiceRequestsPage from '@/pages/portal/ServiceRequestsPage';
 import EvaluationPage from '@/pages/portal/EvaluationPage';
 import CompliancePage from '@/pages/portal/CompliancePage';
 
@@ -60,6 +61,14 @@ function AppLayout() {
             element={
               <ProtectedRoute>
                 <RenewalPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/service-requests"
+            element={
+              <ProtectedRoute>
+                <ServiceRequestsPage />
               </ProtectedRoute>
             }
           />
