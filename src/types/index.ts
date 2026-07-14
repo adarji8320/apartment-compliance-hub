@@ -29,6 +29,16 @@ export type ColourRating = 'green' | 'yellow' | 'red';
 export type RegistrationStatus = 'Active' | 'Renewal Due' | 'Pending' | 'Expired';
 export type ServiceRequestUrgency = 'urgent' | 'non-urgent';
 export type ServiceRequestStatus = 'open' | 'in-progress' | 'resolved';
+export type ServiceRequestType =
+  | 'pest-complaint'
+  | 'no-heat'
+  | 'no-hot-water'
+  | 'elevator-outage'
+  | 'electrical-issue'
+  | 'cooling-issue'
+  | 'general-maintenance'
+  | 'notification-board'
+  | 'other';
 
 export interface Building {
   id: string;
@@ -46,7 +56,15 @@ export interface Building {
 
 export interface ServiceRequest {
   id: string;
+  buildingId: string;
+  buildingAddress: string;
+  type: ServiceRequestType;
   urgency: ServiceRequestUrgency;
+  description: string;
+  unitNumber: string;
+  tenantContact: string;
+  dateSubmitted: string;
+  responseDue: string;
   status: ServiceRequestStatus;
 }
 

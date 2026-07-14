@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import type { RegistrationStatus } from '@/types';
+import type { RegistrationStatus, ServiceRequestStatus, ServiceRequestUrgency } from '@/types';
 
 interface StatusBadgeProps {
   status: RegistrationStatus;
@@ -23,6 +23,57 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
       )}
     >
       {status}
+    </span>
+  );
+}
+
+interface ServiceRequestStatusBadgeProps {
+  status: ServiceRequestStatus;
+  className?: string;
+}
+
+const serviceRequestStatusConfig: Record<ServiceRequestStatus, { label: string; classes: string }> =
+  {
+    open: { label: 'Open', classes: 'bg-blue-100 text-blue-800 border border-blue-300' },
+    'in-progress': {
+      label: 'In Progress',
+      classes: 'bg-yellow-100 text-yellow-800 border border-yellow-300',
+    },
+    resolved: { label: 'Resolved', classes: 'bg-green-100 text-green-800 border border-green-300' },
+  };
+
+export function ServiceRequestStatusBadge({ status, className }: ServiceRequestStatusBadgeProps) {
+  const config = serviceRequestStatusConfig[status];
+  return (
+    <span
+      className={cn(
+        'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold',
+        config.classes,
+        className,
+      )}
+    >
+      {config.label}
+    </span>
+  );
+}
+
+interface UrgencyBadgeProps {
+  urgency: ServiceRequestUrgency;
+  className?: string;
+}
+
+export function UrgencyBadge({ urgency, className }: UrgencyBadgeProps) {
+  return (
+    <span
+      className={cn(
+        'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold',
+        urgency === 'urgent'
+          ? 'bg-red-100 text-red-800 border border-red-300'
+          : 'bg-gray-100 text-gray-700 border border-gray-300',
+        className,
+      )}
+    >
+      {urgency === 'urgent' ? 'Urgent' : 'Non-Urgent'}
     </span>
   );
 }

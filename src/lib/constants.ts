@@ -32,6 +32,18 @@ export const HARDCODED_CREDENTIALS = {
 
 export const AUTH_STORAGE_KEY = 'apartment_compliance_hub_auth';
 
+export const SERVICE_REQUEST_TYPES = [
+  { value: 'pest-complaint', label: 'Pest complaint', urgency: 'urgent' as const },
+  { value: 'no-heat', label: 'No heat / insufficient heat', urgency: 'urgent' as const },
+  { value: 'no-hot-water', label: 'No hot water', urgency: 'urgent' as const },
+  { value: 'elevator-outage', label: 'Elevator outage', urgency: 'urgent' as const },
+  { value: 'electrical-issue', label: 'Electrical issue', urgency: 'urgent' as const },
+  { value: 'cooling-issue', label: 'Cooling issue', urgency: 'non-urgent' as const },
+  { value: 'general-maintenance', label: 'General maintenance', urgency: 'non-urgent' as const },
+  { value: 'notification-board', label: 'Notification board', urgency: 'non-urgent' as const },
+  { value: 'other', label: 'Other', urgency: 'non-urgent' as const },
+] as const;
+
 export const WARDS = [
   'Ward 1 - Harborview',
   'Ward 2 - Old Mill District',
